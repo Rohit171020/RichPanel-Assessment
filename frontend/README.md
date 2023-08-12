@@ -1,4 +1,4 @@
-# Stripe
+# Stripe Web-App
 <img src="./src/assets/s1.png" alt="s1" />
 <img src="./src/assets/s2.png" alt="s2" />
 <img src="./src/assets/s3.png" alt="s3" />
