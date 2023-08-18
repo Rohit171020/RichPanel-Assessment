@@ -142,7 +142,7 @@ export default function Dashboard() {
             backgroundColor: "white",
             color: "#1e4c91",
             width: "inherit",
-            margin: "10px"
+            margin: "11px"
           }}
         >
           Log Out
@@ -152,7 +152,7 @@ export default function Dashboard() {
           className="btn"
           style={{
             backgroundColor: "white",
-            color: "#1e4c91",
+            color: "#1e4c92",
             width: "inherit"
           }}
         >
@@ -160,7 +160,7 @@ export default function Dashboard() {
         </Link>
       </div>
 
-      <div style={{ marginTop: 20 }}>
+      <div style={{ marginTop: 22 }}>
         {renderTransactionList()}
       </div>
     </div>
