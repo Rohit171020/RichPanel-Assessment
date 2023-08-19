@@ -1,56 +1,56 @@
-import React ,{useContext} from 'react'
-import './plancard.css'
-import {AppContext} from "../../utils/AppContext"
+import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import './custom-plancard.css'; 
+import { AppContext } from '../../utils/AppContext';
 
-export default function PlanCard({type,plan,period,amount,subId}) {
 
-  const {cancelSubscription} = useContext(AppContext);
+export default function CustomPlanCard({ type, plan, period, amount, subId }) { // Updated component name
+
+  const { cancelSubscription } = useContext(AppContext);
   const navigator = useNavigate();
 
   let date = new Date().toLocaleDateString();
   // console.log(date);
 
   return (
-    <div className='card plan__card' >
-        <div className="card__header">
-            <div className='header__left'>
-                 <h3>Current Plan Details</h3>
-                 {
-                    type==="active" ? <span className='active__badge'>Active</span>
-                     : <span className='cancel__badge'>Cancelled</span>
-                 }
-                
-            </div>
-           
-           {
-            type==="active" ? <button onClick={() => {
-              cancelSubscription(subId)
-            } }> Cancel</button> : null
-           }
-            
-        </div>
-
-        <p className='namePlan'>{plan}</p>
-        {
-          plan === "mobile" ? <p className='device-select'>Phone+Tablet</p> : <p>Phone+Tablet+Computer+TV</p>
-        }
-   
-        <h1>&#8377; {amount}/<sub style={{fontWeight: 'normal'}}>{period}</sub></h1>
-        
-        <button className='btn btn__secondary' id='pbtn' onClick={() =>{
-          navigator("/plans");
-        }} >
-         
-            {type==="active" ? "Change Plan" : "Choose Plan" }</button>
-
+    <div className='custom-card custom-plan-card'> {/* Updated class names */}
+      <div className="custom-card-header"> {/* Updated class name */}
+        <div className='custom-header-left'> {/* Updated class name */}
+          <h3>Your Current Subscription</h3>
           {
-            type === "active" ? 
-            (<p>Your subscription has started from now and will auto renew itself.</p>)
-            :
-            <p>Your subscription was cancelled and you will lose access to services on {date}</p>
+            type === "active" ? <span className='custom-active-badge'>Active</span> // Updated class name
+              : <span className='custom-cancel-badge'>Cancelled</span> // Updated class name
           }
 
+        </div>
+
+        {
+          type === "active" ? <button onClick={() => {
+            cancelSubscription(subId)
+          }}> Cancel Subscription</button> : null
+        }
+
+      </div>
+
+      <p className='custom-plan-name'>{plan}</p>
+      {
+        plan === "mobile" ? <p className='custom-device-select'>Phone + Tablet</p> : <p>All Devices</p>
+      }
+
+      <h1>&#8377; {amount}/<sub style={{ fontWeight: 'normal' }}>{period}</sub></h1>
+
+      <button className='custom-button custom-secondary-button' id='custom-pbtn' onClick={() => {
+        navigator("/plans");
+      }}>
+
+        {type === "active" ? "Change Plan" : "Choose Plan"}</button>
+
+      {
+        type === "active" ?
+          (<p>Your subscription is active and will auto-renew.</p>)
+          :
+          <p>Your subscription was cancelled, access ends on {date}</p>
+      }
     </div>
   )
 }
