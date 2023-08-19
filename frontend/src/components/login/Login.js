@@ -100,101 +100,101 @@
 //     </div>
 //   );
 // 
-import React, { useContext, useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { AppContext } from "../../utils/AppContext";
+// import React, { useContext, useState, useEffect } from "react";
+// import { Link } from "react-router-dom";
+// import { AppContext } from "../../utils/AppContext";
 
-export default function AuthForm({ type }) {
-  const { login, signup, loading } = useContext(AppContext);
+// export default function AuthForm({ type }) {
+//   const { login, signup, loading } = useContext(AppContext);
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [rememberMe, setRememberMe] = useState(false);
+//   const [email, setEmail] = useState("");
+//   const [password, setPassword] = useState("");
+//   const [rememberMe, setRememberMe] = useState(false);
 
-  useEffect(() => {
-    const rememberedUser = localStorage.getItem("rememberedUser");
-    if (rememberedUser) {
-      const userData = JSON.parse(rememberedUser);
-      setEmail(userData.email);
-      setPassword(userData.password);
-      setRememberMe(true);
-    }
-  }, []);
+//   useEffect(() => {
+//     const rememberedUser = localStorage.getItem("rememberedUser");
+//     if (rememberedUser) {
+//       const userData = JSON.parse(rememberedUser);
+//       setEmail(userData.email);
+//       setPassword(userData.password);
+//       setRememberMe(true);
+//     }
+//   }, []);
 
-  const handleFormSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      if (type === "login") {
-        await login(email, password);
-      } else if (type === "signup") {
-        await signup(email, password);
-      }
+//   const handleFormSubmit = async (e) => {
+//     e.preventDefault();
+//     try {
+//       if (type === "login") {
+//         await login(email, password);
+//       } else if (type === "signup") {
+//         await signup(email, password);
+//       }
 
-      if (rememberMe) {
-        const userData = { email, password };
-        localStorage.setItem("rememberedUser", JSON.stringify(userData));
-      } else {
-        localStorage.removeItem("rememberedUser");
-      }
-    } catch (error) {
-      console.log("Error during authentication:", error);
-    }
-  };
+//       if (rememberMe) {
+//         const userData = { email, password };
+//         localStorage.setItem("rememberedUser", JSON.stringify(userData));
+//       } else {
+//         localStorage.removeItem("rememberedUser");
+//       }
+//     } catch (error) {
+//       console.log("Error during authentication:", error);
+//     }
+//   };
 
-  return (
-    <div className="card">
-      <div className="card__content">
-        <h3>{type === "login" ? "Login to your account" : "Create Account"}</h3>
-        <form onSubmit={handleFormSubmit}>
-          <label htmlFor="email">Email</label>
-          <input
-            value={email}
-            onChange={(e) => setEmail(e.currentTarget.value)}
-            required
-            type="email"
-            name="email"
-            id="email"
-          />
+//   return (
+//     <div className="card">
+//       <div className="card__content">
+//         <h3>{type === "login" ? "Login to your account" : "Create Account"}</h3>
+//         <form onSubmit={handleFormSubmit}>
+//           <label htmlFor="email">Email</label>
+//           <input
+//             value={email}
+//             onChange={(e) => setEmail(e.currentTarget.value)}
+//             required
+//             type="email"
+//             name="email"
+//             id="email"
+//           />
 
-          <label htmlFor="password">Password</label>
-          <input
-            value={password}
-            onChange={(e) => setPassword(e.currentTarget.value)}
-            required
-            type="password"
-            name="password"
-            id="password"
-          />
+//           <label htmlFor="password">Password</label>
+//           <input
+//             value={password}
+//             onChange={(e) => setPassword(e.currentTarget.value)}
+//             required
+//             type="password"
+//             name="password"
+//             id="password"
+//           />
 
-          {type === "signup" && (
-            <label htmlFor="rememberMe">
-              <input
-                type="checkbox"
-                checked={rememberMe}
-                onChange={(e) => setRememberMe(e.target.checked)}
-                id="rememberMe"
-              />
-              Remember Me
-            </label>
-          )}
+//           {type === "signup" && (
+//             <label htmlFor="rememberMe">
+//               <input
+//                 type="checkbox"
+//                 checked={rememberMe}
+//                 onChange={(e) => setRememberMe(e.target.checked)}
+//                 id="rememberMe"
+//               />
+//               Remember Me
+//             </label>
+//           )}
 
-          <input
-            disabled={loading}
-            className="btn"
-            id="btn"
-            type="submit"
-            value={loading ? "Loading..." : type === "login" ? "Login" : "Sign Up"}
-          />
+//           <input
+//             disabled={loading}
+//             className="btn"
+//             id="btn"
+//             type="submit"
+//             value={loading ? "Loading..." : type === "login" ? "Login" : "Sign Up"}
+//           />
 
-          <p className="formfooter">
-            {type === "login" ? "New to MyApp?" : "Already have an account?"}{" "}
-            <Link to={type === "login" ? "/signup" : "/"}>{type === "login" ? "Sign Up" : "Login"}</Link>
-          </p>
-        </form>
-      </div>
-    </div>
-  );
-}
+//           <p className="formfooter">
+//             {type === "login" ? "New to MyApp?" : "Already have an account?"}{" "}
+//             <Link to={type === "login" ? "/signup" : "/"}>{type === "login" ? "Sign Up" : "Login"}</Link>
+//           </p>
+//         </form>
+//       </div>
+//     </div>
+//   );
+// }
 
 
 
@@ -290,71 +290,71 @@ export default function AuthForm({ type }) {
 //   );
 // }
 
-// import React, { useContext, useState, useEffect } from "react";
-// import { Link } from "react-router-dom";
-// import "./signup.css";
-// import { AppContext } from "../../utils/AppContext";
+import React, { useContext, useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import "./signup.css";
+import { AppContext } from "../../utils/AppContext";
 
-// export default function Signup() {
+export default function Signup() {
 
-//   const [name, setName] = useState("");
-//   const [email, setEmail] = useState("");
-//   const [password, setPassword] = useState("");
-//   const [rememberMe, setRememberMe] = useState(false); // Add this state
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [rememberMe, setRememberMe] = useState(false); // Add this state
 
-//   const { signup, loading } = useContext(AppContext);
+  const { signup, loading } = useContext(AppContext);
 
-//   useEffect(() => {
-//     const rememberedUser = localStorage.getItem("rememberedUser");
-//     if (rememberedUser) {
-//       const userData = JSON.parse(rememberedUser);
-//       setEmail(userData.email);
-//       setPassword(userData.password);
-//       setRememberMe(true);
-//     }
-//   }, []); // This empty dependency array ensures the effect runs only once
+  useEffect(() => {
+    const rememberedUser = localStorage.getItem("rememberedUser");
+    if (rememberedUser) {
+      const userData = JSON.parse(rememberedUser);
+      setEmail(userData.email);
+      setPassword(userData.password);
+      setRememberMe(true);
+    }
+  }, []); // This empty dependency array ensures the effect runs only once
 
-//   const handleFormSubmit = (e) => {
-//     e.preventDefault();
-//     signup(name, email, password);
-//     if (rememberMe) {
-//       const userData = { email, password };
-//       localStorage.setItem("rememberedUser", JSON.stringify(userData));
-//     } else {
-//       localStorage.removeItem("rememberedUser");
-//     }
-//   };
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    signup(name, email, password);
+    if (rememberMe) {
+      const userData = { email, password };
+      localStorage.setItem("rememberedUser", JSON.stringify(userData));
+    } else {
+      localStorage.removeItem("rememberedUser");
+    }
+  };
 
-//   return (
-//     <div className="card">
-//       <div className="card__content">
-//         <h3>Create Account</h3>
-//         <form onSubmit={handleFormSubmit}>
-//           {/* Rest of your form inputs */}
+  return (
+    <div className="card">
+      <div className="card__content">
+        <h3>Create Account</h3>
+        <form onSubmit={handleFormSubmit}>
+          {/* Rest of your form inputs */}
           
-//           <label htmlFor="rememberMe">
-//             <input
-//               type="checkbox"
-//               checked={rememberMe}
-//               onChange={(e) => setRememberMe(e.target.checked)}
-//               id="rememberMe"
-//             />
-//             Remember Me
-//           </label>
+          <label htmlFor="rememberMe">
+            <input
+              type="checkbox"
+              checked={rememberMe}
+              onChange={(e) => setRememberMe(e.target.checked)}
+              id="rememberMe"
+            />
+            Remember Me
+          </label>
 
-//           <input
-//             disabled={loading}
-//             className="btn"
-//             id="btn"
-//             type="submit"
-//             value={loading ? "Loading..." : "Sign Up"}
-//           />
+          <input
+            disabled={loading}
+            className="btn"
+            id="btn"
+            type="submit"
+            value={loading ? "Loading..." : "Sign Up"}
+          />
 
-//           <p className="formfooter">
-//             Already have an account? <Link to="/"> Login</Link>
-//           </p>
-//         </form>
-//       </div>
-//     </div>
-//   );
-// }
+          <p className="formfooter">
+            Already have an account? <Link to="/"> Login</Link>
+          </p>
+        </form>
+      </div>
+    </div>
+  );
+}
